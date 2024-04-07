@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7f7f3f1b-43dd-4a42-9325-74f22dcc75b1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AFDMinimizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageFromFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageMathématiqueParInteraction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Automaton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AutomatonEvaluator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Complementaire.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Difference.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/SampleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/State.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Transition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/UnionAFDInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/interNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/intersectionAFD.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/listeNodes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_row.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_table.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com.example.automatefini/Home.fxml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="CSS File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2djF3r9FRmePR8EGsv6HJvsoxIX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AffichageFromFile.executor": "Run",
+    "Application.AffichageMathématiqueParInteraction.executor": "Run",
+    "Application.Complementaire.executor": "Run",
+    "Application.Difference.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.UnionAFDInterface.executor": "Run",
+    "Application.UnionInteraction.executor": "Run",
+    "Application.intersectionAFD.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/hp/Downloads/AFDProjet",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\Downloads\AFDProjet\src\main\resources\com.example.automatefini" />
+      <recent name="C:\Users\hp\Downloads\AFDProjet\src\main\resources" />
+      <recent name="C:\Users\hp\Downloads\AFDProjet\src\main\resources\com\example\automatefini\images" />
+      <recent name="C:\Users\hp\Downloads\AFDProjet\src\main\java" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="automatefini" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="automatefini" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-20.0.2-corretto-20.0.2.1-f644763e9732-27d99999" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f7f3f1b-43dd-4a42-9325-74f22dcc75b1" name="Changes" comment="" />
+      <created>1710513384835</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710513384835</updated>
+      <workItem from="1710513386525" duration="13289000" />
+      <workItem from="1710536957121" duration="10271000" />
+      <workItem from="1710590478996" duration="1016000" />
+      <workItem from="1710598039334" duration="5114000" />
+      <workItem from="1710789706227" duration="2250000" />
+      <workItem from="1710794735716" duration="8590000" />
+      <workItem from="1711717132819" duration="875000" />
+      <workItem from="1711809823327" duration="156000" />
+      <workItem from="1712402371653" duration="5103000" />
+      <workItem from="1712421128103" duration="1157000" />
+      <workItem from="1712428304689" duration="989000" />
+      <workItem from="1712484712715" duration="1119000" />
+      <workItem from="1712485853410" duration="18000" />
+      <workItem from="1712487971529" duration="51000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
