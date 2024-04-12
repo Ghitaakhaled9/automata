@@ -1,12 +1,10 @@
 package com.example.automatefini;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-
 
 public class Automaton {
 
@@ -14,19 +12,21 @@ public class Automaton {
     private char terminals[];
     private State states[];
     private Transition transitions[];
-    private  transition_table tr_table;
+    private transition_table tr_table;
     private State inState;
     private State fiStates[];
     private int initialState;
-    //private Set<Integer> finalStates;
+    // private Set<Integer> finalStates;
 
     public Automaton() {
         this.tr_table = new transition_table();
     }
 
+    void indexOfTerminal() {
+    }
 
     public Automaton(int numStates, int numTerminals, int numFinalStates, char[] terminals, State[] states,
-                     Transition[] transitions, State inState, State[] fiStates) {
+            Transition[] transitions, State inState, State[] fiStates) {
         this.numStates = numStates;
         this.numTerminals = numTerminals;
         this.numFinalStates = numFinalStates;
@@ -36,8 +36,6 @@ public class Automaton {
         this.inState = inState;
         this.fiStates = fiStates;
     }
-
-
 
     public Automaton(char[] terminals, State[] states, Transition[] transitions, State inState, State[] fiStates) {
         this.terminals = terminals;
@@ -66,6 +64,7 @@ public class Automaton {
     public int getNumFinalStates() {
         return numFinalStates;
     }
+
     public State getStateByNumber(int stateNumber) {
         for (State state : this.getStates()) {
             if (state.getStateNumber() == stateNumber) {
@@ -82,7 +81,6 @@ public class Automaton {
     public char[] getTerminals() {
         return terminals;
     }
-
 
     public void setTerminals(char[] terminals) {
         this.terminals = terminals;
@@ -119,6 +117,7 @@ public class Automaton {
     public void setFiStates(State[] fiStates) {
         this.fiStates = fiStates;
     }
+
     public State getNextState(State currentState, char symbol) {
         for (Transition transition : transitions) {
             if (transition.getSourceState().equals(currentState) && transition.getTerminal() == symbol) {
@@ -186,6 +185,7 @@ public class Automaton {
 
     public boolean accepts(String input) {
         int currentState = 0;
+        System.out.println("input:" + input);
         for (char symbol : input.toCharArray()) {
             int terminalIndex = indexOfTerminal(symbol);
             if (terminalIndex == -1) {
@@ -193,15 +193,22 @@ public class Automaton {
                 return false;
             }
             currentState = transitions[currentState * numTerminals + terminalIndex].getTargetState().getStateNumber();
+            System.out.println("ccuuuuuuuuuuuuu" + currentState);
 
         }
+        System.out.println("cc" + currentState);
+
         return states[currentState].isFinal();
     }
 
     public int indexOfTerminal(char terminal) {
-        for (int i = 0; i < numTerminals; i++) {
-            if (terminals[i] == terminal) {
+        System.out.println("termmmmmmmmmmmmm" + this.numTerminals);
+        for (int i = 0; i < this.numTerminals; i++) {
+            System.out.println("term" + i);
+            if (this.terminals[i] == terminal) {
+
                 return i;
+
             }
         }
         return -1;
@@ -304,7 +311,6 @@ public class Automaton {
         return new Automaton(terminals, states, transitions, initialState, finalStates);
     }
 
-
     private static State findState(State[] states, int stateNumber) {
         for (State state : states) {
             if (state.getStateNumber() == stateNumber) {
@@ -313,7 +319,6 @@ public class Automaton {
         }
         return null; // Si l'état n'est pas trouvé
     }
-
 
     // Méthode utilitaire pour concaténer deux tableaux de caractères
     private static char[] concatArrays(char[] arr1, char[] arr2) {
@@ -389,6 +394,7 @@ public class Automaton {
 
         return lines;
     }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -405,6 +411,7 @@ public class Automaton {
         builder.append("Final States: ").append(Arrays.toString(fiStates)).append("\n");
         return builder.toString();
     }
+
     public State getTargetStateForSymbol(State currentState, char symbol) {
         // Iterate through all transitions to find the matching one
         for (Transition transition : transitions) {
@@ -420,10 +427,12 @@ public class Automaton {
         // Return null if no valid transition is found
         return null;
     }
+
     public Automaton intersection(Automaton automaton1, Automaton automaton2) {
         Automaton resultAutomaton = new Automaton();
 
-        // Iterate through the states of automaton1 and automaton2 to create the transition table
+        // Iterate through the states of automaton1 and automaton2 to create the
+        // transition table
         for (State stateAfd1 : automaton1.getStates()) {
             for (State stateAfd2 : automaton2.getStates()) {
                 transition_row row = new transition_row(); // Create a new row for each state combination
@@ -440,22 +449,21 @@ public class Automaton {
         // Display the content of each cell in the transition table
         for (transition_row row : tr_table.getTrasition_table()) {
             for (transition_cell cell : row.getTransition_row()) {
-                System.out.println("Afd1 State: " + cell.getAfd1State().getStateNumber() + ", Afd2 State: " + cell.getAfd2State().getStateNumber());
+                System.out.println("Afd1 State: " + cell.getAfd1State().getStateNumber() + ", Afd2 State: "
+                        + cell.getAfd2State().getStateNumber());
             }
         }
-        //we are going to identify the terminals in common of thoes both
-        char terminals1[]= automaton1.getTerminals();
-        char terminals2[]= automaton2.getTerminals();
-        char terminalsInter[]= interTerminal(terminals1,terminals2);
+        // we are going to identify the terminals in common of thoes both
+        char terminals1[] = automaton1.getTerminals();
+        char terminals2[] = automaton2.getTerminals();
+        char terminalsInter[] = interTerminal(terminals1, terminals2);
 
-        //test if the intersection terminals are correct
-        for( int i=0; i<terminalsInter.length;i++) {
-            System.out.println("terminal["+i+"]"+"="+terminalsInter[i]);
+        // test if the intersection terminals are correct
+        for (int i = 0; i < terminalsInter.length; i++) {
+            System.out.println("terminal[" + i + "]" + "=" + terminalsInter[i]);
         }
 
-
-        //now we are going to create the next cells for each terminal
-
+        // now we are going to create the next cells for each terminal
 
         for (int i = 0; i < automaton1.getStates().length; i++) {
             for (int j = 0; j < automaton2.getStates().length; j++) {
@@ -471,15 +479,14 @@ public class Automaton {
             }
         }
 
-
-
         // Display the content of each cell in the transition table
         for (int i = 0; i < tr_table.getTrasition_table().size(); i++) {
             transition_row row = tr_table.getTrasition_table().get(i);
             System.out.print("Row " + i + ": ");
             for (int j = 0; j < row.getTransition_row().size(); j++) {
                 transition_cell cell = row.getTransition_row().get(j);
-                System.out.print("Afd1 State: " + cell.getAfd1State().getStateNumber() + ", Afd2 State: " + cell.getAfd2State().getStateNumber());
+                System.out.print("Afd1 State: " + cell.getAfd1State().getStateNumber() + ", Afd2 State: "
+                        + cell.getAfd2State().getStateNumber());
                 if (j < row.getTransition_row().size() - 1) {
                     System.out.print(" | ");
                 }
@@ -487,8 +494,8 @@ public class Automaton {
             System.out.println(); // Move to the next line after printing all cells of the row
         }
 
-        //  we are going to create the states of the intersection of the two states
-        //first we are going to mark up the final states
+        // we are going to create the states of the intersection of the two states
+        // first we are going to mark up the final states
         // Iterate over the rows in the transition table
         for (int rowIndex = 0; rowIndex < tr_table.getTrasition_table().size(); rowIndex++) {
             transition_row currentRow = tr_table.getTrasition_table().get(rowIndex);
@@ -523,7 +530,8 @@ public class Automaton {
                 State currentState1 = currentCell.getAfd1State();
                 State currentState2 = currentCell.getAfd2State();
 
-                // Find the corresponding first cell with matching Afd1State and Afd2State numbers
+                // Find the corresponding first cell with matching Afd1State and Afd2State
+                // numbers
                 for (transition_row row : tr_table.getTrasition_table()) {
                     transition_cell firstCellOfRow = row.getTransition_row().get(0);
                     State firstCellState1 = firstCellOfRow.getAfd1State();
@@ -540,7 +548,8 @@ public class Automaton {
             }
         }
 
-        // Display the content of the intersectionState for each cell in the transition table
+        // Display the content of the intersectionState for each cell in the transition
+        // table
         for (transition_row row : tr_table.getTrasition_table()) {
             StringBuilder rowContent = new StringBuilder(); // StringBuilder to hold the content of each row
 
@@ -557,9 +566,6 @@ public class Automaton {
             System.out.println(rowContent.toString());
         }
 
-
-
-
         interNode finalList = new interNode(); // Create a list to store interNode objects
         for (transition_row row : tr_table.getTrasition_table()) {
             listeNodes list = new listeNodes(); // Create a new list for each row
@@ -570,90 +576,83 @@ public class Automaton {
             finalList.addList(list); // Add the list for the current row to the final list
         }
 
-
-        //display final list elements
+        // display final list elements
 
         for (int i = 0; i < finalList.getInterStates().size(); i++) {
             for (int j = 0; j < finalList.getInterStates().get(i).getListNodes().size(); j++) {
-                System.out.println("row " + i + " cell " + j + ": " + finalList.getInterStates().get(i).getListNodes().get(j).getStateNumber());
+                System.out.println("row " + i + " cell " + j + ": "
+                        + finalList.getInterStates().get(i).getListNodes().get(j).getStateNumber());
             }
         }
-        //construction de afd reusultat de intersection
+        // construction de afd reusultat de intersection
         State[] states;
         Transition[] transitions;
         State inState;
         State[] fiStates;
         List<Transition> intersectionTransitions = new ArrayList<>();
-        List<State>   intersectionStates = new ArrayList<>();
-        List<State>   intersectionfiStates = new ArrayList<>();
-        //now we are going to create the transitions
+        List<State> intersectionStates = new ArrayList<>();
+        List<State> intersectionfiStates = new ArrayList<>();
+        // now we are going to create the transitions
 
         for (int i = 0; i < finalList.getInterStates().size(); i++) {
             List<State> nodeList = finalList.getInterStates().get(i).getListNodes();
             State sourceState = nodeList.get(0);
 
-            for (int k =0;k<terminalsInter.length;k++) {
-                State targetState = nodeList.get(k+1);
+            for (int k = 0; k < terminalsInter.length; k++) {
+                State targetState = nodeList.get(k + 1);
                 Transition transition = new Transition(sourceState, terminalsInter[k], targetState);
                 intersectionTransitions.add(transition);
             }
         }
 
-
-        //display the transitons
+        // display the transitons
         System.out.println(intersectionTransitions.size());
         for (Transition transition : intersectionTransitions) {
 
-            System.out.println(transition.toString()); // Assuming there's a proper toString() method in the Transition class
+            System.out.println(transition.toString()); // Assuming there's a proper toString() method in the Transition
+                                                       // class
         }
-        //etats
-
+        // etats
 
         for (int i = 0; i < finalList.getInterStates().size(); i++) {
             List<State> nodeList = finalList.getInterStates().get(i).getListNodes();
             State sourceState = nodeList.get(0);
             intersectionStates.add(sourceState);
 
-
         }
-        //display the etatas
+        // display the etatas
         System.out.println(intersectionStates.size());
         for (State etat : intersectionStates) {
             System.out.println(etat.toString()); // Assuming there's a proper toString() method in the Transition class
         }
 
-        //etats finaux
-
+        // etats finaux
 
         for (int i = 0; i < finalList.getInterStates().size(); i++) {
             List<State> nodeList = finalList.getInterStates().get(i).getListNodes();
             State sourceState = nodeList.get(0);
-            if(sourceState.isFinal()) {
+            if (sourceState.isFinal()) {
                 intersectionfiStates.add(sourceState);
             }
 
         }
-        //display the final etatas
+        // display the final etatas
         System.out.println(intersectionfiStates.size());
         for (State etat : intersectionfiStates) {
             System.out.println(etat.toString()); // Assuming there's a proper toString() method in the Transition class
         }
 
-        //construction du automaton reusultat
+        // construction du automaton reusultat
         resultAutomaton = new Automaton(
-                intersectionStates.size(),  // numStates
-                terminalsInter.length,  // numTerminals
-                intersectionfiStates.size(),  // numFinalStates
-                terminalsInter,  // terminals
-                intersectionStates.toArray(new State[0]),  // states
-                intersectionTransitions.toArray(new Transition[0]),  // transitions
-                intersectionStates.get(0),  // inState
-                intersectionfiStates.toArray(new State[0])  // fiStates
+                intersectionStates.size(), // numStates
+                terminalsInter.length, // numTerminals
+                intersectionfiStates.size(), // numFinalStates
+                terminalsInter, // terminals
+                intersectionStates.toArray(new State[0]), // states
+                intersectionTransitions.toArray(new Transition[0]), // transitions
+                intersectionStates.get(0), // inState
+                intersectionfiStates.toArray(new State[0]) // fiStates
         );
-
-
-
-
 
         return resultAutomaton;
     }
@@ -722,7 +721,8 @@ public class Automaton {
         // Fonction de transition
         mathematicalForm.append("Fonction de transition :\n");
         for (Transition transition : transitions) {
-            mathematicalForm.append("δ(").append(transition.getSourceState()).append(", ").append(transition.getTerminal()).append(") = ").append(transition.getTargetState()).append("\n");
+            mathematicalForm.append("δ(").append(transition.getSourceState()).append(", ")
+                    .append(transition.getTerminal()).append(") = ").append(transition.getTargetState()).append("\n");
         }
 
         return mathematicalForm.toString();
@@ -764,15 +764,13 @@ public class Automaton {
         }
     }
 
-
-
     public enum LanguageType {
         FINITE,
         INFINITE,
         EMPTY
     }
 
-   public static Automaton.LanguageType determineLanguageType(Automaton automaton) {
+    public static Automaton.LanguageType determineLanguageType(Automaton automaton) {
         State[] fiStates = automaton.getFiStates();
         if (fiStates == null || fiStates.length == 0) {
             return Automaton.LanguageType.EMPTY;
@@ -797,7 +795,5 @@ public class Automaton {
         }
         return false;
     }
-
-
 
 }

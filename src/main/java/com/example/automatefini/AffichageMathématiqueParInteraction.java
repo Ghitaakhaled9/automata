@@ -55,19 +55,6 @@ public class AffichageMathématiqueParInteraction extends Application {
             primaryStage.close();
         });
 
-        etapeDeCalcul.setOnAction(e -> {
-            // Récupérer le mot saisi par l'utilisateur
-            TextInputDialog inputDialog = new TextInputDialog();
-            inputDialog.setHeaderText("Étape Calcul");
-            inputDialog.setContentText("Entrez un mot :");
-            inputDialog.setTitle("Étape Calcul");
-            inputDialog.showAndWait().ifPresent(word -> {
-                // Évaluer le mot avec l'automate et afficher les étapes de calcul
-                AutomatonEvaluator.evaluateWord(automaton, word);
-            });
-        });
-
-
         loadFileButton.setOnAction(e -> {
             // Rediriger vers la première interface
             AffichageFromFile affichageFromFile = new AffichageFromFile();
@@ -84,7 +71,8 @@ public class AffichageMathématiqueParInteraction extends Application {
             String finalStates = finalStatesTextArea.getText();
 
             // Vérifier si les champs sont vides
-            if (numStates.isEmpty() || alphabet.isEmpty() || transitionFunction.isEmpty() || initialState.isEmpty() || finalStates.isEmpty()) {
+            if (numStates.isEmpty() || alphabet.isEmpty() || transitionFunction.isEmpty() || initialState.isEmpty()
+                    || finalStates.isEmpty()) {
                 showErrorAlert("Erreur", "Champs manquants", "Veuillez remplir tous les champs.");
                 return;
             }
@@ -96,47 +84,67 @@ public class AffichageMathématiqueParInteraction extends Application {
             char[] alphabetArray = alphabet.replaceAll("\\s+", "").toCharArray();
 
             // Créer un objet Automaton en utilisant les valeurs saisies
-            Automaton automaton = new Automaton();
+            // Automaton automaton = new Automaton();
             automaton.setNumStates(Integer.parseInt(numStates));
             automaton.setNumTerminals(alphabetArray.length);
             automaton.setNumFinalStates(finalStatesArray.length);
             automaton.setTerminals(alphabetArray);
 
+            System.out.println(automaton.getTerminals()[0]);
+            System.out.println(automaton.getTerminals()[1]);
+
             // Créer des états pour l'automate
-            for (int i = 0; i < automaton.getNumStates(); i++) {
-                State state = new State();
-                state.setStateNumber(i);
-                automaton.addState(state);
-            }
 
             // Ajouter les transitions à l'automate
             String[] transitions = transitionFunction.split(";");
             for (String transitionStr : transitions) {
                 String[] parts = transitionStr.trim().split(",");
                 if (parts.length != 3) {
-                    showErrorAlert("Erreur", "Fonction de transition invalide", "Veuillez entrer la fonction de transition sous forme 'état source, symbole, état cible'.");
+                    showErrorAlert("Erreur", "Fonction de transition invalide",
+                            "Veuillez entrer la fonction de transition sous forme 'état source, symbole, état cible'.");
                     return;
                 }
                 State sourceState = new State();
-                sourceState.setStateNumber(Integer.parseInt(parts[0].trim().substring(1))); // Extracting the state number from the transition string
+                sourceState.setStateNumber(Integer.parseInt(parts[0].trim().substring(1))); // Extracting the state
+                                                                                            // number from the
+                                                                                            // transition string
                 State targetState = new State();
-                targetState.setStateNumber(Integer.parseInt(parts[2].trim().substring(1))); // Extracting the state number from the transition string
+                targetState.setStateNumber(Integer.parseInt(parts[2].trim().substring(1))); // Extracting the state
+                                                                                            // number from the
+                                                                                            // transition string
                 Transition transition = new Transition(sourceState, parts[1].trim().charAt(0), targetState);
                 automaton.addTransition(transition);
             }
 
             // Définir l'état initial
             State initial = new State();
-            initial.setStateNumber(Integer.parseInt(initialState.substring(1))); // Extracting the state number from the initial state string
+            initial.setStateNumber(Integer.parseInt(initialState.substring(1))); // Extracting the state number from the
+                                                                                 // initial state string
             automaton.setInState(initial);
 
             // Définir les états finaux
             for (String finalStateStr : finalStatesArray) {
                 State finalState = new State();
-                finalState.setStateNumber(Integer.parseInt(finalStateStr.substring(1))); // Extracting the state number from the final state string
+                finalState.setStateNumber(Integer.parseInt(finalStateStr.substring(1)));
+                finalState.setFinal(true); // Extracting the state number
+                                           // from the final state string
                 automaton.addFinalState(finalState);
-            }
 
+            }
+            for (int i = 0; i < automaton.getNumStates(); i++) {
+
+                State state = new State();
+
+                state.setStateNumber(i);
+                for (int j = 0; j < automaton.getFiStates().length; j++) {
+                    if (state.getStateNumber() == automaton.getFiStates()[j].getStateNumber()) {
+                        state.setFinal(true);
+                    }
+                }
+                automaton.addState(state);
+            }
+            System.out.println(automaton.getFinalStates()[0]);
+            System.out.println(automaton.getFinalStates()[1]);
             // Afficher la forme mathématique de l'AFD
             String mathematicalForm = automaton.toMathematicalForm();
 
@@ -146,6 +154,21 @@ public class AffichageMathématiqueParInteraction extends Application {
             alert.setHeaderText(null);
             alert.setContentText(mathematicalForm);
             alert.showAndWait();
+        });
+
+        etapeDeCalcul.setOnAction(e -> {
+            // Récupérer le mot saisi par l'utilisateur
+            TextInputDialog inputDialog = new TextInputDialog();
+            inputDialog.setHeaderText("Étape Calcul");
+            inputDialog.setContentText("Entrez un mot :");
+            inputDialog.setTitle("Étape Calcul");
+            inputDialog.showAndWait().ifPresent(word -> {
+                // Évaluer le mot avec l'automate et afficher les étapes de calcul
+                System.out.println("word00:" + word);
+                System.out.println("auuut" + automaton.getTerminals()[0]);
+                AutomatonEvaluator.evaluateWord(automaton, word);
+
+            });
         });
 
         VBox additionalButtons = new VBox(5, regexButton, langTypeButton, loadFileButton, etapeDeCalcul, retour);

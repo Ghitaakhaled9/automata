@@ -14,13 +14,16 @@ public class AutomatonEvaluator {
 
     public static void evaluateWord(Automaton automaton, String word) {
         // Vérifier si le mot est accepté par l'automate
-        boolean isAccepted = automaton.accepts(word);
+        System.out.println("wordFirst:" + word);
+        boolean isAccepted;
         String initialWord = word;
         // Afficher les étapes de calcul
         StringBuilder calculationSteps = new StringBuilder();
         int currentState = 0;
 
         for (char symbol : word.toCharArray()) {
+            System.out.println("veeeeeeeerify");
+            // System.out.println("auuut" + automaton.getTerminals()[0]);
             int terminalIndex = automaton.indexOfTerminal(symbol);
             // Vérifier si le symbole est dans l'alphabet
             if (terminalIndex == -1) {
@@ -28,8 +31,8 @@ public class AutomatonEvaluator {
                 return;
             }
 
-            int targetState = automaton.getTransitions()[currentState * automaton.getNumTerminals() + terminalIndex]
-                    .getTargetState().getStateNumber();
+            int targetState = automaton.getTransitions()[currentState * automaton.getNumTerminals()
+                    + terminalIndex].getTargetState().getStateNumber();
 
             calculationSteps.append("On lit '").append(symbol).append("', l'état actuel est q").append(currentState)
                     .append(", le nouvel état est q").append(targetState).append(", et le reste du mot est '")
@@ -38,10 +41,12 @@ public class AutomatonEvaluator {
             // Passer à l'état suivant
             currentState = targetState;
             // Supprimer le premier caractère du mot restant
-            word = word.substring(1);
+            // word = word.substring(1);
         }
 
         // Afficher le résultat
+        isAccepted = automaton.accepts(word);
+        System.out.println("word:" + word);
         if (isAccepted) {
             showSuccessDialog("Succès", "Mot accepté", "Le mot '" + initialWord + "' est accepté par l'automate.",
                     calculationSteps.toString());
@@ -50,7 +55,6 @@ public class AutomatonEvaluator {
                     calculationSteps.toString());
         }
     }
-
 
     // Méthode pour afficher une dialog de succès
     private static void showSuccessDialog(String title, String header, String content, String calculationSteps) {
@@ -63,7 +67,8 @@ public class AutomatonEvaluator {
     }
 
     // Méthode générique pour afficher une dialog de résultat
-    private static void showResultDialog(Alert.AlertType type, String title, String header, String content, String calculationSteps) {
+    private static void showResultDialog(Alert.AlertType type, String title, String header, String content,
+            String calculationSteps) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle(title);
         dialog.setHeaderText(header);
@@ -93,7 +98,6 @@ public class AutomatonEvaluator {
             dialog.close();
         }
     }
-
 
     // Méthode pour afficher une alerte d'erreur
     static void showErrorAlert(String title, String header, String content) {
