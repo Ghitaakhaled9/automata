@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import com.example.automatefini.AutomatonVisualizer.StateVisualizer;
+import com.example.automatefini.AutomatonVisualizer.TransitionVisualizer;
+
 public class Automaton {
     private int numStates, numTerminals, numFinalStates;
     private char terminals[];
@@ -601,5 +604,40 @@ public class Automaton {
         }
         return false;
     }
+    
 
+    public AutomatonVisualizer convertFromAutomatonToVisualAFD(com.example.automatefini.Automaton automaton) {
+        int numStates = automaton.getNumStates();
+        int numTerminals = automaton.getNumTerminals();
+        int numFinalStates = automaton.getNumFinalStates();
+        char[] terminals = automaton.getTerminals();
+        State[] states_original = automaton.getStates();
+        Transition[] originalTransition= automaton.getTransitions();
+        State[] original_final_states = automaton.getFiStates();
+
+        AutomatonVisualizer.StateVisualizer[] states = new AutomatonVisualizer.StateVisualizer[numStates];
+        for (int i = 0; i < numStates; i++) {
+            
+            states[i] = new StateVisualizer(states_original[i].getStateNumber(), states_original[i].isFinal());
+        }
+
+        AutomatonVisualizer.TransitionVisualizer[] transitions = new AutomatonVisualizer.TransitionVisualizer[automaton.getTransitions().length];
+        for (int i = 0; i < automaton.getTransitions().length; i++) {
+            
+            transitions[i] = new TransitionVisualizer(
+                    originalTransition[i].getSourceState().getStateNumber(),
+                    originalTransition[i].getTargetState().getStateNumber(),
+                    originalTransition[i].getTerminal()
+            );
+        }
+
+        AutomatonVisualizer.StateVisualizer inState = states[0];
+
+        AutomatonVisualizer.StateVisualizer[] fiStates = new AutomatonVisualizer.StateVisualizer[automaton.getFiStates().length];
+        for (int i = 0; i < automaton.getFiStates().length; i++) {
+            fiStates[i] = states[original_final_states[i].getStateNumber()];
+        }
+
+        return new AutomatonVisualizer(numStates, numTerminals, numFinalStates, terminals, states, transitions, inState, fiStates);
+    }
 }
