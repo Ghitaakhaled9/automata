@@ -1,21 +1,14 @@
 package com.example.automatefini;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AFDMinimizer {
 
     public static Automaton minimize(Automaton automaton) {
-        // Clone the automaton to preserve the original
-        Automaton minimizedAutomaton = cloneAutomaton(automaton);
-
-        // Step 1: Split states into two sets - final and non-final
         Set<State> finalStates = new HashSet<>();
         Set<State> nonFinalStates = new HashSet<>();
-        for (State state : minimizedAutomaton.getStates()) {
+
+        for (State state : automaton.getStates()) {
             if (state.isFinal()) {
                 finalStates.add(state);
             } else {
@@ -23,121 +16,103 @@ public class AFDMinimizer {
             }
         }
 
-        // Step 2: Continue splitting states until no further splits are possible
+        List<Set<State>> partitions = new ArrayList<>();
+        if (!finalStates.isEmpty()) partitions.add(finalStates);
+        if (!nonFinalStates.isEmpty()) partitions.add(nonFinalStates);
+
         boolean changed;
         do {
             changed = false;
-            Set<Set<State>> newPartition = new HashSet<>();
+            List<Set<State>> newPartitions = new ArrayList<>();
 
-            // Add final and non-final states to the partition
-            newPartition.add(finalStates);
-            newPartition.add(nonFinalStates);
+            // Step 3: Iterate over current partitions
+            for (Set<State> partition : partitions) {
+                // Map to group states by their transition behavior
+                Map<String, Set<State>> groupedByTransitions = new HashMap<>();
 
-            // Iterate over each state pair in the current partition
-            for (Set<State> stateSet : newPartition) {
-                Set<Set<State>> split = splitStateSet(stateSet, minimizedAutomaton);
-                if (split.size() > 1) {
-                    newPartition.remove(stateSet);
-                    newPartition.addAll(split);
-                    changed = true;
-                    break;
-                }
-            }
-
-            if (changed) {
-                // Update final and non-final states based on the new partition
-                finalStates.clear();
-                nonFinalStates.clear();
-                for (Set<State> stateSet : newPartition) {
-                    if (containsFinalState(stateSet)) {
-                        finalStates.addAll(stateSet);
-                    } else {
-                        nonFinalStates.addAll(stateSet);
+                // Step 4: Group states based on their transition behavior on each terminal
+                for (State state : partition) {
+                    StringBuilder transitionKey = new StringBuilder();
+                    for (char terminal : automaton.getTerminals()) {
+                        State nextState = automaton.getNextState(state, terminal);
+                        int partitionIndex = getPartitionIndex(partitions, nextState);
+                        transitionKey.append(partitionIndex).append("-");
                     }
+                    groupedByTransitions
+                            .computeIfAbsent(transitionKey.toString(), k -> new HashSet<>())
+                            .add(state);
+                }
+
+                // Step 5: Add groups with different transition behaviors to new partitions
+                newPartitions.addAll(groupedByTransitions.values());
+                if (groupedByTransitions.size() > 1) {
+                    changed = true;
                 }
             }
+
+            partitions = newPartitions;
+
         } while (changed);
 
-        // Create the minimized automaton
-        State initialState = getMergedState(minimizedAutomaton.getInState(), finalStates);
-        Set<State> mergedFinalStates = new HashSet<>();
-        for (State finalState : finalStates) {
-            mergedFinalStates.add(getMergedState(finalState, finalStates));
-        }
+        // Step 6: Create new states, transitions, initial state, and final states for the minimized automaton
+        Map<State, State> mergedStateMap = new HashMap<>();
+        List<State> newStates = new ArrayList<>();
+        List<Transition> newTransitions = new ArrayList<>();
+        State newInitialState = null;
+        Set<State> newFinalStates = new HashSet<>();
 
-        List<State> mergedStates = new ArrayList<>();
-        mergedStates.add(initialState);
-        mergedStates.addAll(mergedFinalStates);
-        mergedStates.addAll(getMergedNonFinalStates(nonFinalStates, finalStates));
+        int stateCounter = 0;
+        for (Set<State> partition : partitions) {
+            State representative = partition.iterator().next();
+            State mergedState = new State(stateCounter++, containsFinalState(partition));
+            newStates.add(mergedState);
 
-        Set<Transition> mergedTransitions = getMergedTransitions(minimizedAutomaton, mergedStates);
+            // Map original states to their merged state
+            for (State state : partition) {
+                mergedStateMap.put(state, mergedState);
+            }
 
-        return new Automaton(automaton.getTerminals(), mergedStates.toArray(new State[0]),
-                mergedTransitions.toArray(new Transition[0]), initialState,
-                mergedFinalStates.toArray(new State[0]));
-    }
-
-    private static Automaton cloneAutomaton(Automaton automaton) {
-        return new Automaton(automaton.getTerminals().clone(), cloneStates(automaton.getStates()),
-                cloneTransitions(automaton.getTransitions()), automaton.getInState(),
-                automaton.getFiStates().clone());
-    }
-
-    private static State[] cloneStates(State[] states) {
-        State[] clonedStates = new State[states.length];
-        for (int i = 0; i < states.length; i++) {
-            clonedStates[i] = new State(states[i].getStateNumber(), states[i].isFinal());
-        }
-        return clonedStates;
-    }
-
-    private static Transition[] cloneTransitions(Transition[] transitions) {
-        Transition[] clonedTransitions = new Transition[transitions.length];
-        for (int i = 0; i < transitions.length; i++) {
-            clonedTransitions[i] = new Transition(transitions[i].getSourceState(),
-                    transitions[i].getTerminal(), transitions[i].getTargetState());
-        }
-        return clonedTransitions;
-    }
-
-    private static Set<Set<State>> splitStateSet(Set<State> stateSet, Automaton automaton) {
-        Set<Set<State>> partitions = new HashSet<>();
-        Set<State> visited = new HashSet<>();
-        for (State state : stateSet) {
-            if (!visited.contains(state)) {
-                Set<State> equivalentStates = getEquivalentStates(state, stateSet, automaton);
-                partitions.add(equivalentStates);
-                visited.addAll(equivalentStates);
+            // Determine initial state and final states of the minimized automaton
+            if (automaton.getInState().equals(representative)) {
+                newInitialState = mergedState;
+            }
+            if (containsFinalState(partition)) {
+                newFinalStates.add(mergedState);
             }
         }
-        return partitions;
-    }
 
-    private static Set<State> getEquivalentStates(State state, Set<State> stateSet, Automaton automaton) {
-        Set<State> equivalentStates = new HashSet<>();
-        equivalentStates.add(state);
-        for (State otherState : stateSet) {
-            if (otherState.equals(state)) {
-                continue;
-            }
-            if (areEquivalentStates(state, otherState, automaton)) {
-                equivalentStates.add(otherState);
+        // Step 7: Create new transitions based on merged states
+        for (State oldState : automaton.getStates()) {
+            State newState = mergedStateMap.get(oldState);
+            for (char terminal : automaton.getTerminals()) {
+                State oldNextState = automaton.getNextState(oldState, terminal);
+                if (oldNextState != null) {
+                    State newNextState = mergedStateMap.get(oldNextState);
+                    newTransitions.add(new Transition(newState, terminal, newNextState));
+                }
             }
         }
-        return equivalentStates;
+
+        // Step 8: Return the minimized automaton
+        return new Automaton(
+                automaton.getTerminals(),
+                newStates.toArray(new State[0]),
+                newTransitions.toArray(new Transition[0]),
+                newInitialState,
+                newFinalStates.toArray(new State[0])
+        );
     }
 
-    private static boolean areEquivalentStates(State state1, State state2, Automaton automaton) {
-        for (char terminal : automaton.getTerminals()) {
-            State nextState1 = automaton.getNextState(state1, terminal);
-            State nextState2 = automaton.getNextState(state2, terminal);
-            if (!nextState1.equals(nextState2)) {
-                return false;
+    // Helper method to get the index of the partition containing a given state
+    private static int getPartitionIndex(List<Set<State>> partitions, State state) {
+        if (state == null) return -1;
+        for (int i = 0; i < partitions.size(); i++) {
+            if (partitions.get(i).contains(state)) {
+                return i;
             }
         }
-        return true;
+        return -1;
     }
-
     private static boolean containsFinalState(Set<State> stateSet) {
         for (State state : stateSet) {
             if (state.isFinal()) {
@@ -145,38 +120,5 @@ public class AFDMinimizer {
             }
         }
         return false;
-    }
-
-    private static State getMergedState(State state, Set<State> finalStates) {
-        if (finalStates.contains(state)) {
-            return new State(0, true);
-        } else {
-            return new State(0, false);
-        }
-    }
-
-    private static List<State> getMergedNonFinalStates(Set<State> nonFinalStates, Set<State> finalStates) {
-        List<State> mergedNonFinalStates = new ArrayList<>();
-        for (State state : nonFinalStates) {
-            if (!finalStates.contains(state)) {
-                mergedNonFinalStates.add(new State(0, false));
-            }
-        }
-        return mergedNonFinalStates;
-    }
-
-    private static Set<Transition> getMergedTransitions(Automaton automaton, List<State> mergedStates) {
-        Set<Transition> mergedTransitions = new HashSet<>();
-        for (State state : mergedStates) {
-            for (char terminal : automaton.getTerminals()) {
-                State nextState = automaton.getNextState(state, terminal);
-                if (nextState != null) {
-                    State mergedNextState = getMergedState(nextState, new HashSet<>(Arrays.asList(automaton.getFiStates())));
-
-                    mergedTransitions.add(new Transition(state, terminal, mergedNextState));
-                }
-            }
-        }
-        return mergedTransitions;
     }
 }

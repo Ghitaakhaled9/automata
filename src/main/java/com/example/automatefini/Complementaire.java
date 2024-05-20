@@ -8,32 +8,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Complementaire extends Application {
-
     private Automaton automaton2;
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage primaryStage) {
         Button chooseFile1Button = new Button("Choisissez un fichier");
         Button calculatecompButton = new Button("Calculer le complémentaire");
-        /*Button showMathButton = new Button("Show Math Details");*/
         Button backButton = new Button("Retour");
 
         calculatecompButton.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");
-       /* showMathButton.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");*/
         backButton.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");
         chooseFile1Button.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");
 
         calculatecompButton.setMinWidth(200);
-     /*   showMathButton.setMinWidth(200);*/
         backButton.setMinWidth(200);
         chooseFile1Button.setMinWidth(200);
 
@@ -99,7 +89,6 @@ public class Complementaire extends Application {
             }
         }
         content.append("\n");
-
         outputTextArea.setText(content.toString());
     }
 }

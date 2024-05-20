@@ -5,34 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f7f3f1b-43dd-4a42-9325-74f22dcc75b1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AFDMinimizer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageFromFile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageMathématiqueParInteraction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Automaton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AutomatonEvaluator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Complementaire.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Difference.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AFDMinimizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AFDMinimizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageFromFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageFromFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageMathématiqueParInteraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AffichageMathématiqueParInteraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Automaton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Automaton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AutomatonEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/AutomatonEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Complementaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Complementaire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Difference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Difference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/HelloController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/SampleController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Transition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/UnionAFDInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/interNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/intersectionAFD.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/listeNodes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_cell.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_row.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_table.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com.example.automatefini/Home.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Transition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/Transition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/UnionAFDInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/UnionAFDInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/interNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/interNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/intersectionAFD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/intersectionAFD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/listeNodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/listeNodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_row.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/automatefini/transition_table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +43,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -77,7 +72,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/hp/Downloads/AFDProjet",
+    "last_opened_file_path": "C:/Users/hp/OneDrive/Bureau/automata",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -96,19 +91,24 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.automatefini.HelloApplication" />
       <module name="automatefini" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.automatefini.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="automatefini" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -139,6 +139,14 @@
       <workItem from="1712484712715" duration="1119000" />
       <workItem from="1712485853410" duration="18000" />
       <workItem from="1712487971529" duration="51000" />
+      <workItem from="1715816529761" duration="1823000" />
+      <workItem from="1715819955272" duration="1373000" />
+      <workItem from="1715856600947" duration="1530000" />
+      <workItem from="1715861427857" duration="1752000" />
+      <workItem from="1715867679446" duration="57000" />
+      <workItem from="1715871245250" duration="267000" />
+      <workItem from="1715951661655" duration="174000" />
+      <workItem from="1716210589915" duration="6414000" />
     </task>
     <servers />
   </component>

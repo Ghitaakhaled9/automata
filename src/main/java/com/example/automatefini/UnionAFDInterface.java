@@ -1,6 +1,5 @@
 package com.example.automatefini;
 
-import com.example.automatefini.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -14,21 +13,15 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class UnionAFDInterface extends Application {
-
     private Automaton automaton1;
     private Automaton automaton2;
     private Automaton automaton3;
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage primaryStage) {
-        Button chooseFile1Button = new Button("Choose File 1");
-        Button chooseFile2Button = new Button("Choose File 2");
-        Button calculateUnionButton = new Button("Calculate Union");
-        Button showMathButton = new Button("Show Math Details");
+        Button chooseFile1Button = new Button("Choisir le fichier 1 ");
+        Button chooseFile2Button = new Button("Choisir le fichier 2");
+        Button calculateUnionButton = new Button("Calculer l'union");
+        Button showMathButton = new Button("Forme mathématique");
         Button backButton = new Button("Retour");
 
         chooseFile2Button.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");
@@ -36,9 +29,6 @@ public class UnionAFDInterface extends Application {
         calculateUnionButton.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");
         showMathButton.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");
         backButton.setStyle("-fx-background-color: #4C4CFF; -fx-text-fill: white;");
-
-
-
 
         chooseFile2Button.setMinWidth(150);
         chooseFile1Button.setMinWidth(150);
@@ -72,7 +62,6 @@ public class UnionAFDInterface extends Application {
         });
 
         backButton.setOnAction(e -> {
-            // Redirect to the first interface
             HelloApplication helloApplication = new HelloApplication();
             helloApplication.start(new Stage());
             primaryStage.close();
@@ -102,7 +91,6 @@ public class UnionAFDInterface extends Application {
                 outputTextArea.setText(content.toString());
             }
         });
-
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.setTitle("Calculate Union");
         primaryStage.show();
@@ -117,16 +105,12 @@ public class UnionAFDInterface extends Application {
     public Automaton union(Automaton automaton1, Automaton automaton2) throws IOException {
         automaton1 = Complementaire.complementAutomaton(automaton1);
         automaton2 = Complementaire.complementAutomaton(automaton2);
-
         // Create a new instance of Automaton
         automaton3 = new Automaton();
-
         // Calculate the intersection of automaton1 and automaton2
         automaton3 = automaton3.intersection(automaton1, automaton2);
-
         // Calculate the complement of the intersection
         automaton3 = Complementaire.complementAutomaton(automaton3);
-
         return automaton3;
     }
 

@@ -2,8 +2,7 @@ package com.example.automatefini;
 
 public class Transition {
     private State sourceState;
-    private Character terminal;  // Use Character instead of char to allow null
-
+    private Character terminal;
     private State targetState;
 
     public Transition(State sourceState, Character terminal, State targetState) {
@@ -11,7 +10,6 @@ public class Transition {
         this.terminal = terminal;
         this.targetState = targetState;
     }
-
     public State getSourceState() {
         return sourceState;
     }
@@ -35,7 +33,6 @@ public class Transition {
     public void setTargetState(State targetState) {
         this.targetState = targetState;
     }
-
     @Override
     public String toString() {
         return "δ(" + sourceState.getStateNumber() + ", '" + terminal + "') = " + targetState.getStateNumber();
